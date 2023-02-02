@@ -4,7 +4,13 @@ body {
 }
 
 button {
+  font-size: inherit;
   border: none;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
 }
 
 .wrapper {
@@ -26,4 +32,9 @@ button {
   max-width: 1220px;
   margin: 0 auto;
   padding: 0 10px;
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-weight: 400;
 }
