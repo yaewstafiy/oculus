@@ -1,20 +1,41 @@
-'use strict';
+window.addEventListener('DOMContentLoaded', () => {
+  const tabsContent = document.querySelectorAll('.features-tabs__content-item'),
+    tabsParent = document.querySelector('.features-tabs__btn'),
+    tabs = document.querySelectorAll('.features-tabs__btn-item');
 
-const tabItem = document.querySelectorAll('.features-tabs__btn-item');
-const tabContent = document.querySelectorAll('.features-tabs__content-item');
-
-tabItem.forEach(item => {
-  item.addEventListener('click', (e) => {
-    e.preventDefault();
-    const button = e.currentTarget.dataset.button;
-
-    tabItem.forEach(item => {
-      item.classList.remove('features-tabs__btn-item--active');
+  function hideTabContent() {
+    tabsContent.forEach(item => {
+      item.classList.add('hide');
+      item.classList.remove('show-grid', 'fade')
     });
-    tabContent.forEach(item => {
-      item.classList.remove('features-tabs__content-item--active');
-    });
-    e.currentTarget.classList.add('features-tabs__btn-item--active');
-    document.querySelector(`#${button}`).classList.add('features-tabs__content-item--active');
+
+    tabs.forEach(tab => {
+      tab.classList.remove('features-tabs__btn-item--active')
+    })
+  }
+
+  function showTabContent(i = 0) {
+    tabsContent[i].classList.add('show-grid', 'fade');
+    tabsContent[i].classList.remove('hide');
+
+    tabs[i].classList.add('features-tabs__btn-item--active');
+
+  }
+
+  hideTabContent();
+  showTabContent();
+
+  tabsParent.addEventListener('click', (e) => {
+    const target = e.target;
+
+    if (target && target.classList.contains('features-tabs__btn-item')) {
+      tabs.forEach((item, i) => {
+        if (target == item) {
+          hideTabContent();
+          showTabContent(i);
+        }
+      });
+    }
   });
 });
+

@@ -205,22 +205,14 @@
   }
 
   &__content {
-    position: relative;
     min-height: 300px;
   }
 
   &__content-item {
-    position: absolute;
     display: grid;
     grid-template-columns: auto 280px;
     grid-template-rows: auto 150px;
     gap: 40px;
-    opacity: 0;
-    transition: opacity 1s ease;
-
-    &--active {
-      opacity: 1;
-    }
   }
 
   &__video {
@@ -338,5 +330,28 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.show-grid {
+  display: grid;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 0.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.2;
+  }
+
+  to {
+    opacity: 1;
   }
 }
