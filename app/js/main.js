@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
+
   const tabsContent = document.querySelectorAll('.features-tabs__content-item'),
     tabsParent = document.querySelector('.features-tabs__btn'),
     tabs = document.querySelectorAll('.features-tabs__btn-item');
@@ -6,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function hideTabContent() {
     tabsContent.forEach(item => {
       item.classList.add('hide');
-      item.classList.remove('show-grid', 'fade')
+      item.classList.remove('show-grid', 'fade');
     });
 
     tabs.forEach(tab => {
