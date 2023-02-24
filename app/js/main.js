@@ -44,9 +44,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // BURGER
 
-  const burgerButton = document.querySelector('.burger');
-  const overlay = document.querySelector('.overlay');
-  const headerLogo = document.querySelector('.header__logo');
+  const burgerButton = document.querySelector('.burger'),
+        overlay      = document.querySelector('.overlay');
 
   function closeMenu() {
     burgerButton.classList.remove('burger--active');
@@ -57,7 +56,6 @@ window.addEventListener('DOMContentLoaded', () => {
   burgerButton.addEventListener('click', (e) => {
     overlay.classList.toggle('overlay--active');
     burgerButton.classList.toggle('burger--active');
-    overlay.prepend(headerLogo);
 
     if (burgerButton.classList.contains('burger--active')) {
       document.body.style.overflow = 'hidden';
