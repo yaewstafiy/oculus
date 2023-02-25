@@ -104,5 +104,63 @@ window.addEventListener('DOMContentLoaded', () => {
   // ПОТОМ НАДО ЗАКОНЧИТЬ, КАК ПОЙМУ КАК РЕШИТЬ ПРОБЛЕМУ
 
 
+  // Scroll
+
+  const dataScrollItems = document.querySelectorAll('[data-scroll]'),
+        headerLinkList  = document.querySelectorAll('.header__link');
+
+  function scrollToPage(directionDataScroll) {
+    window.scrollTo({
+      top: directionDataScroll.offsetTop - 65,
+      behavior: 'smooth'
+    })
+  }
+
+  headerLinkList.forEach((item, i) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToPage(dataScrollItems[i]);
+    })
+  })
+
+  // Scroll button
+  const scrollButton = document.querySelector('#slide-to-top');
+  scrollButton.classList.add('invisible');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      scrollButton.classList.remove('invisible');
+      scrollButton.classList.add('visible');
+    } else {
+      scrollButton.classList.add('invisible');
+      scrollButton.classList.remove('visible');
+    }
+  });
+
+  scrollButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  });
+
+  // Basket
+
+  const addBtns      = document.querySelectorAll('.accessories__btn'),
+        basket       = document.querySelector('.basket'),
+        basketNumber = document.querySelector('.basket span');
+  let counter = 0;
+
+  addBtns.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      counter++;
+      if (!basket.classList.contains('basket--on')) {
+        basket.classList.add('basket--on');
+      }
+      basketNumber.textContent = counter;
+    })
+  })
+
 });
 
