@@ -42,15 +42,25 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // BURGER
+  // BURGER MENU
 
   const burgerButton = document.querySelector('.burger'),
-        overlay      = document.querySelector('.overlay');
+    overlay = document.querySelector('.overlay');
 
   function closeMenu() {
     burgerButton.classList.remove('burger--active');
     overlay.classList.remove('overlay--active');
     document.body.style.overflow = '';
+  }
+
+  function closeOverlay(e) {
+    if (
+      e.target !== overlay &&
+      !overlay.contains(e.target) &&
+      e.target !== burgerButton
+    ) {
+      closeMenu();
+    }
   }
 
   burgerButton.addEventListener('click', (e) => {
@@ -70,6 +80,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Закрытие меню по клику на площадь рядом с оверлеем
+
+  window.addEventListener('click', closeOverlay);
+
+
   // Добавление формы в меню
 
   const newForm = document.createElement('form');
@@ -84,46 +99,39 @@ window.addEventListener('DOMContentLoaded', () => {
   `;
   overlay.append(newForm);
 
-  // Закрытие меню
-
-  // window.addEventListener('click', (e) => {
-  //   const target = e.target;
-  //   if (
-  //     target !== burgerButton &&
-  //     target !== overlay &&
-  //     target !== headerLogo
-  //   ) {
-  //     burgerButton.classList.remove('burger--active');
-  //     overlay.classList.remove('overlay--active');
-  //     document.body.style.overflow = '';
-  //   }
-  // });
-
-
-
-  // ПОТОМ НАДО ЗАКОНЧИТЬ, КАК ПОЙМУ КАК РЕШИТЬ ПРОБЛЕМУ
-
 
   // Scroll
 
   const dataScrollItems = document.querySelectorAll('[data-scroll]'),
-        headerLinkList  = document.querySelectorAll('.header__link');
+    headerLinkList = document.querySelectorAll('.header__link');
 
   function scrollToPage(directionDataScroll) {
-    window.scrollTo({
-      top: directionDataScroll.offsetTop - 65,
-      behavior: 'smooth'
-    })
+    if (document.documentElement.clientWidth > 750) {
+      window.scrollTo({
+        top: directionDataScroll.offsetTop - 120,
+        behavior: 'smooth'
+      })
+    } else {
+      window.scrollTo({
+        top: directionDataScroll.offsetTop - 76,
+        behavior: 'smooth'
+      })
+    }
   }
 
   headerLinkList.forEach((item, i) => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       scrollToPage(dataScrollItems[i]);
+
+      if (overlay.classList.contains('overlay--active')) {
+        closeMenu();
+      }
     })
   })
 
   // Scroll button
+
   const scrollButton = document.querySelector('#slide-to-top');
   scrollButton.classList.add('invisible');
 
@@ -146,9 +154,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Basket
 
-  const addBtns      = document.querySelectorAll('.accessories__btn'),
-        basket       = document.querySelector('.basket'),
-        basketNumber = document.querySelector('.basket span');
+  const addBtns = document.querySelectorAll('.accessories__btn'),
+    basket = document.querySelector('.basket'),
+    basketNumber = document.querySelector('.basket span');
+
   let counter = 0;
 
   addBtns.forEach(item => {

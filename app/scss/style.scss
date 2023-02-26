@@ -43,7 +43,7 @@
 }
 
 .basket {
-  padding-right: 0;
+  padding-right: 10px;
   justify-self: end;
 
   span {
@@ -53,7 +53,6 @@
 
 .basket--on {
   position: relative;
-  padding-right: 10px;
 
   span {
     font-size: 12px;
